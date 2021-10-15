@@ -1,82 +1,88 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="show" persistent max-width="38vw">
-      <div class="form-container">
-        <v-form ref="form">
-          <v-card>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="6">
-                    <v-text-field
-                      :rules="[rules.required]"
-                      v-model="this.firstName"
-                      outlined
-                      label="First name"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6">
-                    <v-text-field
-                      :rules="[rules.required]"
-                      v-model="this.lastName"
-                      outlined
-                      label="Last name"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      :rules="[rules.required]"
-                      v-model="this.companyName"
-                      outlined
-                      label="Company Name"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      :rules="[rules.required]"
-                      v-model="this.jobTitle"
-                      outlined
-                      label="Job Title"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      :rules="[rules.required, rules.email]"
-                      v-model="this.email"
-                      label="Business Email Address"
-                      outlined
-                      required
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+    <v-dialog v-model="show" persistent max-width="38vw" >
+      <div class="d-flex pa-5">
+        <div class="form-container">
+          <v-form ref="form">
+            <v-card>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="12" md="6">
+                      <v-text-field
+                        :rules="[rules.required]"
+                        v-model="this.firstName"
+                        outlined
+                        label="First name"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="6">
+                      <v-text-field
+                        :rules="[rules.required]"
+                        v-model="this.lastName"
+                        outlined
+                        label="Last name"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        :rules="[rules.required]"
+                        v-model="this.companyName"
+                        outlined
+                        label="Company Name"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        :rules="[rules.required]"
+                        v-model="this.jobTitle"
+                        outlined
+                        label="Job Title"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        :rules="[rules.required, rules.email]"
+                        v-model="this.email"
+                        label="Business Email Address"
+                        outlined
+                        required
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
 
-            <v-card-actions>
-              <v-btn
-                class="mx-auto white--text"
-                large
-                width="10vw"
-                color="#7776bc"
-                @click="validate"
-              >
-                Send
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-form>
-      </div>
-      <div class="exit-btn-container">
-        <v-img
-          class="exit"
-          :src="require('@/assets/close.png')"
-          @click="$emit('close')"
-        >
-        </v-img>
+              <v-card-actions>
+                <v-btn
+                  class="mx-auto white--text"
+                  large
+                  width="10vw"
+                  color="#7776bc"
+                  @click="validate"
+                >
+                  Send
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-form>
+        </div>
+        <div class="exit-btn-container">
+     
+     <v-img
+          contain
+            class="exit mt-n2"
+            :src="require('@/assets/close.png')"
+            @click="$emit('close')"
+          >
+          </v-img>
+    
+     
+        </div>
       </div>
     </v-dialog>
   </v-row>
@@ -127,6 +133,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .v-dialog{
+  box-shadow: none;;
+}
+.exit{
+  width: 45px;
+
+}
 .exit:hover {
   cursor: pointer;
 }

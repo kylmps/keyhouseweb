@@ -1,8 +1,21 @@
 <template>
   <section class="bg">
     <div class="parent">
-      <div class="header-container">
-        <!-- header logo -->
+      <header class="header mx-15 pt-5">
+        <v-img
+          max-width="200px"
+          :src="require('@/assets/keyhouse-logo.png')"
+        ></v-img>
+        <li class="nav">
+          <ul>
+            <h3>About</h3>
+          </ul>
+          <ul>
+            <h3>Contact</h3>
+          </ul>
+        </li>
+      </header>
+      <!-- <div class="header-container">
         <div class="logo">
           <v-img
             max-width="3%"
@@ -15,7 +28,7 @@
         <div class="contact">
           <h3>Contact</h3>
         </div>
-      </div>
+      </div> -->
 
       <!-- heading text -->
       <div class="heading-container">
@@ -78,9 +91,21 @@ export default {
   margin-bottom: 4%;
 }
 
-
-.header-container {
+.header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .nav {
+    list-style: none;
+    display: flex;
+  }
+
+  li h3 {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+  }
 }
 
 .logo {
