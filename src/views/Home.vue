@@ -1,21 +1,20 @@
 <template>
   <section class="bg">
     <div class="parent">
-      <div class="header-container">
-        <!-- header logo -->
-        <div class="logo">
-          <v-img
-            max-width="3%"
-            :src="require('@/assets/keyhouse-logo.png')"
-          ></v-img>
-        </div>
-        <div class="about">
-          <h3>About</h3>
-        </div>
-        <div class="contact">
-          <h3>Contact</h3>
-        </div>
-      </div>
+      <header class="header mx-15 pt-5">
+        <v-img
+          max-width="200px"
+          :src="require('@/assets/keyhouse-logo.png')"
+        ></v-img>
+        <li class="nav">
+          <ul>
+            <h3>About</h3>
+          </ul>
+          <ul>
+            <h3>Contact</h3>
+          </ul>
+        </li>
+      </header>
 
       <!-- heading text -->
       <div class="heading-container">
@@ -24,7 +23,7 @@
 
       <!-- button request a demo -->
       <div class="btn-container">
-        <v-btn class="white--text btn" color="#f5b638" @click="showDiag = true">
+        <v-btn depressed class="white--text btn" color="#f5b638" @click="showDiag = true">
           Request a Demo
         </v-btn>
       </div>
@@ -33,19 +32,21 @@
       <div class="client-logo-container">
         <v-img
           class="top"
-          max-width="85%"
+          max-width="88vw"
           :src="require('@/assets/top.png')"
         ></v-img>
-        <!-- <v-img></v-img> -->
       </div>
 
-      <!-- footer -->
-      <div class="footer-container">
-        <h4 class="footer">Manila, Philippines</h4>
-      </div>
+      
 
       <DemoPopup :show="showDiag" @close="showDiag = false"></DemoPopup>
-    </div>
+    
+    <!-- footer -->
+    <footer class="footer-container">
+        <h4 class="footer">Manila, Philippines</h4>
+      </footer>
+
+      </div>
   </section>
 </template>
 
@@ -62,77 +63,97 @@ export default {
 
 <style lang="scss" scoped>
 .bg {
+  height: 100%;
   background-color: #7776bc;
-  padding: 0 0;
+  // overflow: overlay !important;
+  // overflow-x: hidden !important;
 }
 
 .parent {
-  max-width: 130rem;
-  margin: 0 auto;
+  // overflow: hidden;
+  padding: 0 0;
+  display: flex;
+  gap: 5.2rem;
+  flex-direction: column;
 }
 
 .heading-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4%;
 }
 
-
-.header-container {
+.header {
+  margin-bottom: 3.2rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .nav {
+    list-style: none;
+    display: flex;
+  }
+  li h3 {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+  }
 }
 
 .logo {
   order: 1;
-  justify-self: flex-start;
-  margin-top: 3rem;
-  margin-left: 5%;
-  margin-bottom: 14%;
-  // padding: 1.2rem 7rem;
 }
-
 .about {
   order: 2;
-  background: red;
 }
-
 .contact {
   order: 3;
 }
 
 .heading {
+  text-align: center;
   font-size: 4rem;
   color: #fffbdb;
   font-weight: 5;
   letter-spacing: 3px;
+  padding: 3.2rem 3.2rem;
 }
 
 .btn-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8%;
+  margin-bottom: 3.2rem;
+}
+
+.btn {
+  text-transform: none;
 }
 
 .client-logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4%;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // margin-bottom: 4%;
+}
+
+.top {
+  margin: auto;
 }
 
 .footer-container {
-  // margin-top: 25.8rem;
+  flex: 1;
+  margin-top: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.6%;
 }
 
 .footer {
+  // margin-top: 3%;
   color: #fffbdb;
   font-weight: 10;
   font-size: 1rem;
+  padding-bottom: 1.6rem;
 }
 </style>
