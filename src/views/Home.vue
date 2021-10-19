@@ -1,34 +1,28 @@
 <template>
   <section class="bg">
     <div class="parent">
-      <header class="header mx-15 pt-5">
+      <header class="header">
         <v-img
-          max-width="200px"
+          :max-width="
+            $vuetify.breakpoint.xs
+              ? '120px'
+              : $vuetify.breakpoint.sm
+              ? '140px'
+              : $vuetify.breakpoint.md
+              ? '160px'
+              : '180px'
+          "
           :src="require('@/assets/keyhouse-logo.png')"
         ></v-img>
-        <li class="nav">
+        <!-- <li class="nav">
           <ul>
             <h3>About</h3>
           </ul>
           <ul>
             <h3>Contact</h3>
           </ul>
-        </li>
+        </li> -->
       </header>
-      <!-- <div class="header-container">
-        <div class="logo">
-          <v-img
-            max-width="3%"
-            :src="require('@/assets/keyhouse-logo.png')"
-          ></v-img>
-        </div>
-        <div class="about">
-          <h3>About</h3>
-        </div>
-        <div class="contact">
-          <h3>Contact</h3>
-        </div>
-      </div> -->
 
       <!-- heading text -->
       <div class="heading-container">
@@ -37,27 +31,131 @@
 
       <!-- button request a demo -->
       <div class="btn-container">
-        <v-btn class="white--text btn" color="#f5b638" @click="showDiag = true">
+        <v-btn
+          x-large
+          depressed
+          class="white--text btn"
+          color="#f5b638"
+          @click="showDiag = true"
+        >
           Request a Demo
         </v-btn>
       </div>
 
       <!-- logo/portfolio transitioning -->
-      <div class="client-logo-container">
-        <v-img
-          class="top"
-          max-width="85%"
-          :src="require('@/assets/top.png')"
-        ></v-img>
-        <!-- <v-img></v-img> -->
-      </div>
+      <!-- batch one -->
+      <ul class="client-logo-container">
+          <li>
+            <v-img
+              class="oneone"
+              max-width="100vw"
+              :src="require('@/assets/one/one.png')"
+            ></v-img>
+          </li>
+          <li>
+            <v-img
+              class="one"
+              max-width="100vw"
+              :src="require('@/assets/one/two.png')"
+            ></v-img>
+          </li>
+          <li>
+            <v-img
+              class="one"
+              max-width="100vw"
+              :src="require('@/assets/one/three.png')"
+            ></v-img>
+          </li>
+          <li>
+            <v-img
+              class="one"
+              max-width="100vw"
+              :src="require('@/assets/one/four.png')"
+            ></v-img>
+          </li>
+          <li>
+            <v-img
+              class="one"
+              max-width="100vw"
+              :src="require('@/assets/one/five.png')"
+            ></v-img>
+          </li>
+          <li>
+            <v-img
+              class="one"
+              max-width="100vw"
+              :src="require('@/assets/one/six.png')"
+            ></v-img>
+          </li>
+          <li>
+            <v-img
+              class="one"
+              max-width="100vw"
+              :src="require('@/assets/one/seven.png')"
+            ></v-img>
+          </li>
+      </ul>
 
-      <!-- footer -->
-      <div class="footer-container">
-        <h4 class="footer">Manila, Philippines</h4>
-      </div>
+      <!-- batch two -->
+      <ul class="client-logo-container">
+        <!-- batch one -->
+        <li>
+          <v-img
+            class="twotwo"
+            max-width="100vw"
+            :src="require('@/assets/two/one.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/two.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/three.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/four.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/five.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/six.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/seven.png')"
+          ></v-img>
+        </li>
+      </ul>
 
       <DemoPopup :show="showDiag" @close="showDiag = false"></DemoPopup>
+
+      <!-- footer -->
+      <footer class="footer-container">
+        <h4 class="footer">Manila, Philippines</h4>
+      </footer>
     </div>
   </section>
 </template>
@@ -75,23 +173,30 @@ export default {
 
 <style lang="scss" scoped>
 .bg {
+  height: 100%;
   background-color: #7776bc;
-  padding: 0 0;
+  // overflow: overlay !important;
+  // overflow-x: hidden !important;
 }
 
 .parent {
-  max-width: 130rem;
-  margin: 0 auto;
+  // overflow: hidden;
+  padding: 0 0;
+  display: flex;
+  gap: 5.2rem;
+  flex-direction: column;
 }
 
 .heading-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4%;
 }
 
 .header {
+  margin: 0 1.6rem;
+  margin-top: 1.2rem;
+  margin-bottom: 3.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,7 +204,6 @@ export default {
     list-style: none;
     display: flex;
   }
-
   li h3 {
     display: block;
     color: white;
@@ -110,54 +214,91 @@ export default {
 
 .logo {
   order: 1;
-  justify-self: flex-start;
-  margin-top: 3rem;
-  margin-left: 5%;
-  margin-bottom: 14%;
-  // padding: 1.2rem 7rem;
 }
-
 .about {
   order: 2;
-  background: red;
 }
-
 .contact {
   order: 3;
 }
 
 .heading {
+  text-align: center;
   font-size: 4rem;
   color: #fffbdb;
   font-weight: 5;
   letter-spacing: 3px;
+  padding: 3.2rem 3.2rem;
 }
 
 .btn-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8%;
+  margin-bottom: 3.2rem;
+}
+
+.btn {
+  text-transform: none;
 }
 
 .client-logo-container {
+  list-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4%;
+  flex-wrap: wrap;
+}
+.oneone {
+}
+.twotwo {
 }
 
 .footer-container {
-  // margin-top: 25.8rem;
+  flex: 1;
+  margin-top: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.6%;
 }
 
 .footer {
   color: #fffbdb;
   font-weight: 10;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  padding-bottom: 1.6rem;
+}
+
+@media (max-width: 1200px) {
+  .parent {
+    // overflow: hidden;
+    gap: 4.8rem;
+  }
+  .heading {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .parent {
+    // overflow: hidden;
+    gap: 4.2rem;
+  }
+  .heading {
+    font-size: 2.4rem;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .header {
+    margin-bottom: 1.2rem;
+  }
+
+  .nav {
+    font-size: 1rem;
+  }
 }
 </style>

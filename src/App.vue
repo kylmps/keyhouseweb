@@ -24,8 +24,7 @@ export default {
 }
 
 html {
-  // overflow: overlay !important;
-  // overflow-x: hidden !important;
+  // 
   // background-color: #7776bc;
   font-size: 62.5%;
 }
