@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="show" persistent>
+  <v-dialog v-model="show" persistent :fullscreen="isMobile">
     <div class="d-flex pa-5 dialog">
       <div class="form-container">
         <v-form ref="form">
@@ -10,7 +10,7 @@
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       :rules="[rules.required]"
-                      v-model="this.firstName"
+                      v-model="firstName"
                       outlined
                       label="First name"
                       required
@@ -19,7 +19,7 @@
                   <v-col cols="12" sm="12" md="6">
                     <v-text-field
                       :rules="[rules.required]"
-                      v-model="this.lastName"
+                      v-model="lastName"
                       outlined
                       label="Last name"
                       required
@@ -28,7 +28,7 @@
                   <v-col cols="12">
                     <v-text-field
                       :rules="[rules.required]"
-                      v-model="this.companyName"
+                      v-model="companyName"
                       outlined
                       label="Company Name"
                       required
@@ -37,7 +37,7 @@
                   <v-col cols="12">
                     <v-text-field
                       :rules="[rules.required]"
-                      v-model="this.jobTitle"
+                      v-model="jobTitle"
                       outlined
                       label="Job Title"
                       required
@@ -46,7 +46,7 @@
                   <v-col cols="12">
                     <v-text-field
                       :rules="[rules.required, rules.email]"
-                      v-model="this.email"
+                      v-model="email"
                       label="Business Email Address"
                       outlined
                       required
@@ -58,8 +58,19 @@
 
             <v-card-actions>
               <v-btn
+                v-if="isMobile"
+                class="my-5 mx-auto black--text btn"
+                x-large
+                width="10vw"
+                color="#DCDCDC"
+                @click="$emit('close')"
+                depressed
+              >
+                Back
+              </v-btn>
+              <v-btn
                 class="my-5 mx-auto white--text btn"
-                large
+                x-large
                 width="10vw"
                 color="#7776bc"
                 @click="validate"
@@ -73,6 +84,7 @@
       </div>
       <div class="exit-btn-container">
         <v-img
+          v-if="!isMobile"
           contain
           class="exit mt-n2"
           :src="require('@/assets/close.png')"
@@ -85,6 +97,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     firstName: "",
@@ -104,21 +118,29 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.signUp();
+        this.inquire();
       } else {
         return;
       }
     },
-    signUp() {
-      const data = {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        company_name: this.companyName,
-        email: this.email,
-      };
-      console.log(data);
+    inquire() {
+      let bodydata = new FormData();
+
+      bodydata.append('name', this.firstName + " " + this.lastName)
+      bodydata.append('email', this.email)
+      bodydata.append('inquiry', 'Request a demo')
+
+      axios({
+        method: "post",
+        url: "https://fourello.com/inquire",
+        data: bodydata,
+      })
+
       this.$emit("close");
     },
+  },
+  created() {
+    this.isMobile = window.innerWidth <= 896 ? true : false;
   },
   props: {
     show: {
@@ -131,6 +153,10 @@ export default {
 <style lang="scss" scoped>
 ::v-deep .v-dialog {
   box-shadow: none;
+}
+
+.dialog {
+  justify-content: center;
 }
 
 .exit {
