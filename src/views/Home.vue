@@ -45,55 +45,66 @@
       <!-- logo/portfolio transitioning -->
       <!-- batch one -->
       <ul class="client-logo-container">
-          <li>
+        <li class="animate">
+          <v-scroll-y-transition >
             <v-img
+              v-if="one"
               class="oneone"
               max-width="100vw"
               :src="require('@/assets/one/one.png')"
             ></v-img>
-          </li>
-          <li>
-            <v-img
-              class="one"
-              max-width="100vw"
-              :src="require('@/assets/one/two.png')"
-            ></v-img>
-          </li>
-          <li>
-            <v-img
-              class="one"
-              max-width="100vw"
-              :src="require('@/assets/one/three.png')"
-            ></v-img>
-          </li>
-          <li>
-            <v-img
-              class="one"
-              max-width="100vw"
-              :src="require('@/assets/one/four.png')"
-            ></v-img>
-          </li>
-          <li>
-            <v-img
-              class="one"
-              max-width="100vw"
-              :src="require('@/assets/one/five.png')"
-            ></v-img>
-          </li>
-          <li>
-            <v-img
-              class="one"
-              max-width="100vw"
-              :src="require('@/assets/one/six.png')"
-            ></v-img>
-          </li>
-          <li>
-            <v-img
-              class="one"
-              max-width="100vw"
-              :src="require('@/assets/one/seven.png')"
-            ></v-img>
-          </li>
+          </v-scroll-y-transition>
+          <v-scroll-y-transition >
+          <v-img
+            v-if="!one"
+            class="oneone"
+            max-width="100vw"
+            :src="require('@/assets/one/two.png')"
+          ></v-img>
+           </v-scroll-y-transition>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/two.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/three.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/four.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/five.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/six.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/seven.png')"
+          ></v-img>
+        </li>
       </ul>
 
       <!-- batch two -->
@@ -167,11 +178,25 @@ export default {
   },
   data: () => ({
     showDiag: false,
+    one: true,
   }),
+  mounted() {
+    setInterval(() => {
+      this.one = !this.one;
+    }, 10000);
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active {
+  transition: all opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
 .bg {
   height: 100%;
   background-color: #7776bc;
