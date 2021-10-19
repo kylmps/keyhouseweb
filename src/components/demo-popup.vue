@@ -1,6 +1,6 @@
 <template>
-  <v-dialog v-model="show" persistent max-width="38vw">
-    <div class="d-flex pa-5">
+  <v-dialog v-model="show" persistent>
+    <div class="d-flex pa-5 dialog">
       <div class="form-container">
         <v-form ref="form">
           <v-card>
@@ -74,7 +74,6 @@
       <div class="exit-btn-container">
         <v-img
           contain
-          width="4vw"
           class="exit mt-n2"
           :src="require('@/assets/close.png')"
           @click="$emit('close')"
@@ -133,8 +132,9 @@ export default {
 ::v-deep .v-dialog {
   box-shadow: none;
 }
+
 .exit {
-  width: 45px;
+  width: 4.2rem;
 }
 .exit:hover {
   cursor: pointer;
@@ -146,6 +146,7 @@ export default {
 }
 
 .form-container {
+  max-width: 38vw;
   align-self: flex-start;
   justify-self: flex-start;
 }
@@ -157,5 +158,20 @@ export default {
 
 .btn {
   text-transform: none;
+}
+
+@media (max-width: 1200px) {
+  .form-container {
+    max-width: 60vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .exit {
+    width: 2.8rem;
+  }
+  .form-container {
+    max-width: 100vw;
+  }
 }
 </style>

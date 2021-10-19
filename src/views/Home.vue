@@ -1,19 +1,28 @@
 <template>
   <section class="bg">
     <div class="parent">
-      <header class="header mx-15 pt-5">
+      <!-- bro pano gawing dynamic tong mx-15 pati pt-5 babawasan ko kapag breakpoint .xs -->
+      <header class="header">
         <v-img
-          max-width="200px"
+          :max-width="
+            $vuetify.breakpoint.xs
+            ? '120px'
+            : $vuetify.breakpoint.sm
+            ? '140px'
+            : $vuetify.breakpoint.md
+            ? '160px'
+            : '180px'
+          "
           :src="require('@/assets/keyhouse-logo.png')"
         ></v-img>
-        <li class="nav">
+        <!-- <li class="nav">
           <ul>
             <h3>About</h3>
           </ul>
           <ul>
             <h3>Contact</h3>
           </ul>
-        </li>
+        </li> -->
       </header>
 
       <!-- heading text -->
@@ -23,30 +32,132 @@
 
       <!-- button request a demo -->
       <div class="btn-container">
-        <v-btn depressed class="white--text btn" color="#f5b638" @click="showDiag = true">
+        <v-btn
+          x-large
+          depressed
+          class="white--text btn"
+          color="#f5b638"
+          @click="showDiag = true"
+        >
           Request a Demo
         </v-btn>
       </div>
 
       <!-- logo/portfolio transitioning -->
-      <div class="client-logo-container">
-        <v-img
-          class="top"
-          max-width="88vw"
-          :src="require('@/assets/top.png')"
-        ></v-img>
-      </div>
+      <!-- batch one -->
+      <ul class="client-logo-container">
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/one.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/two.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/three.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/four.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/five.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/six.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="one"
+            max-width="100vw"
+            :src="require('@/assets/one/one.png')"
+          ></v-img>
+        </li>
+      </ul>
 
-      
+      <!-- batch two -->
+      <ul class="client-logo-container">
+        <!-- batch one -->
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/one.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/two.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/three.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/four.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/five.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/six.png')"
+          ></v-img>
+        </li>
+        <li>
+          <v-img
+            class="two"
+            max-width="100vw"
+            :src="require('@/assets/two/seven.png')"
+          ></v-img>
+        </li>
+      </ul>
 
       <DemoPopup :show="showDiag" @close="showDiag = false"></DemoPopup>
-    
-    <!-- footer -->
-    <footer class="footer-container">
+
+      <!-- footer -->
+      <footer class="footer-container">
         <h4 class="footer">Manila, Philippines</h4>
       </footer>
-
-      </div>
+    </div>
   </section>
 </template>
 
@@ -84,6 +195,8 @@ export default {
 }
 
 .header {
+  margin: 0 1.6rem;
+  margin-top: 1.2rem;
   margin-bottom: 3.2rem;
   display: flex;
   justify-content: space-between;
@@ -131,10 +244,12 @@ export default {
 }
 
 .client-logo-container {
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // margin-bottom: 4%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: #fffbdb solid 2px;
 }
 
 .top {
@@ -143,7 +258,7 @@ export default {
 
 .footer-container {
   flex: 1;
-  margin-top: 2.4rem;
+  margin-top: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,7 +268,40 @@ export default {
   // margin-top: 3%;
   color: #fffbdb;
   font-weight: 10;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding-bottom: 1.6rem;
+}
+
+@media (max-width: 1200px) {
+  .parent {
+    // overflow: hidden;
+    gap: 4.8rem;
+  }
+  .heading {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .parent {
+    // overflow: hidden;
+    gap: 4.2rem;
+  }
+  .heading {
+    font-size: 2.4rem;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .header {
+    margin-bottom: 1.2rem;
+  }
+
+  .nav {
+    font-size: 1rem;
+  }
 }
 </style>
