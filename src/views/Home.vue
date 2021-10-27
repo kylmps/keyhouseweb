@@ -45,71 +45,58 @@
       <!-- logo/portfolio transitioning -->
       <!-- batch one -->
       <ul class="client-logo-container">
-        <li class="animate">
-          <v-scroll-y-transition >
-            <v-img
-              v-if="one"
-              class="oneone"
-              max-width="100vw"
-              :src="require('@/assets/one/one.png')"
-            ></v-img>
-          </v-scroll-y-transition>
-          <v-scroll-y-transition >
-          <v-img
-            v-if="!one"
-            class="oneone"
-            max-width="100vw"
-            :src="require('@/assets/one/two.png')"
-          ></v-img>
-           </v-scroll-y-transition>
-        </li>
         <li>
-          <v-img
-            class="one"
-            max-width="100vw"
-            :src="require('@/assets/one/two.png')"
-          ></v-img>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="one" key="a" :src="require('@/assets/one/one.png')"></v-img>
+            <v-img v-if="!one" key="b" :src="require('@/assets/two/one.png')"></v-img>
+          </transition>
         </li>
+
         <li>
-          <v-img
-            class="one"
-            max-width="100vw"
-            :src="require('@/assets/one/three.png')"
-          ></v-img>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="two" key="a" :src="require('@/assets/one/two.png')"></v-img>
+            <v-img v-if="!two" key="b" :src="require('@/assets/two/two.png')"></v-img>
+          </transition>
         </li>
+
         <li>
-          <v-img
-            class="one"
-            max-width="100vw"
-            :src="require('@/assets/one/four.png')"
-          ></v-img>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="three" :src=" require('@/assets/one/three.png')"></v-img>
+            <v-img v-if="!three" key="b" :src="require('@/assets/two/three.png')"></v-img>
+          </transition>
         </li>
+
         <li>
-          <v-img
-            class="one"
-            max-width="100vw"
-            :src="require('@/assets/one/five.png')"
-          ></v-img>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="four" key="a" :src="require('@/assets/one/four.png')"></v-img>
+            <v-img v-if="!four" key="b" :src="require('@/assets/two/four.png')"></v-img>
+          </transition>
         </li>
+
         <li>
-          <v-img
-            class="one"
-            max-width="100vw"
-            :src="require('@/assets/one/six.png')"
-          ></v-img>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="five" key="a" :src="require('@/assets/one/five.png')"></v-img>
+            <v-img v-if="!five" key="b" :src="require('@/assets/two/five.png')"></v-img>
+          </transition>
         </li>
+
         <li>
-          <v-img
-            class="one"
-            max-width="100vw"
-            :src="require('@/assets/one/seven.png')"
-          ></v-img>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="six" key="a" :src="require('@/assets/one/six.png')"></v-img>
+            <v-img v-if="!six" key="b" :src="require('@/assets/two/six.png')"></v-img>
+          </transition>
+        </li>
+
+        <li>
+          <transition name="slide" mode="out-in">
+            <v-img v-if="seven" key="a" :src="require('@/assets/one/seven.png')"></v-img>
+            <v-img v-if="!seven" key="b" :src="require('@/assets/two/seven.png')"></v-img>
+          </transition>
         </li>
       </ul>
 
       <!-- batch two -->
-      <ul class="client-logo-container">
-        <!-- batch one -->
+      <!-- <ul class="client-logo-container">
         <li>
           <v-img
             class="twotwo"
@@ -159,7 +146,7 @@
             :src="require('@/assets/two/seven.png')"
           ></v-img>
         </li>
-      </ul>
+      </ul> -->
 
       <DemoPopup :show="showDiag" @close="showDiag = false"></DemoPopup>
 
@@ -179,33 +166,65 @@ export default {
   data: () => ({
     showDiag: false,
     one: true,
+    two: true,
+    three: true,
+    four: true,
+    five: true,
+    six: true,
+    seven: true,
   }),
   mounted() {
     setInterval(() => {
       this.one = !this.one;
+      this.two = !this.two;
+      this.three = !this.three;
+      this.four = !this.four;
+      this.five = !this.five;
+      this.six = !this.six;
+      this.seven = !this.seven;
     }, 10000);
+    // setInterval(() => {
+    //   this.two = !this.two;
+    // }, 13000);
+    // setInterval(() => {
+    //   this.three = !this.three;
+    // }, 15000);
+    // setInterval(() => {
+    //   this.four = !this.four;
+    // }, 9000);
+    // setInterval(() => {
+    //   this.five = !this.five;
+    // }, 18000);
+    // setInterval(() => {
+    //   this.six = !this.six;
+    // }, 8000);
+    // setInterval(() => {
+    //   this.seven = !this.seven;
+    // }, 17000);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active {
-  transition: all opacity 0.5s;
+slide-enter-active,
+.slide-leave-active {
+  transition: all 0.8s;
+}
+.slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(+100%);
+}
+.slide-enter {
+  opacity: 1;
+  transform: translateY(-100%);
 }
 
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
-}
 .bg {
   height: 100%;
   background-color: #7776bc;
-  // overflow: overlay !important;
-  // overflow-x: hidden !important;
 }
 
 .parent {
-  // overflow: hidden;
   padding: 0 0;
   display: flex;
   gap: 5.2rem;
@@ -273,10 +292,11 @@ export default {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-}
-.oneone {
-}
-.twotwo {
+  li {
+    // border: #fffbdb 2px solid;
+    // width: 10rem;
+    margin: auto 1.2rem;
+  }
 }
 
 .footer-container {

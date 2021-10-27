@@ -127,12 +127,13 @@ export default {
       let bodydata = new FormData();
 
       bodydata.append('name', this.firstName + " " + this.lastName)
+      bodydata.append('company_name', this.companyName)
+      bodydata.append('job_title', this.jobTitle)
       bodydata.append('email', this.email)
-      bodydata.append('inquiry', 'Request a demo')
 
       axios({
         method: "post",
-        url: "https://fourello.com/inquire",
+        url: "zwell-prod.ap-southeast-1.elasticbeanstalk.com",
         data: bodydata,
       })
 
