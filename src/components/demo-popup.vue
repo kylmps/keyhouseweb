@@ -126,16 +126,16 @@ export default {
     inquire() {
       let bodydata = new FormData();
 
-      bodydata.append('name', this.firstName + " " + this.lastName)
-      bodydata.append('company_name', this.companyName)
-      bodydata.append('job_title', this.jobTitle)
-      bodydata.append('email', this.email)
+      bodydata.append("name", this.firstName + " " + this.lastName);
+      bodydata.append("company_name", this.companyName);
+      bodydata.append("job_title", this.jobTitle);
+      bodydata.append("business_email", this.email);
 
       axios({
         method: "post",
-        url: "zwell-prod.ap-southeast-1.elasticbeanstalk.com",
+        url: "http://devkeyhouseemail-env.eba-wnskmanu.ap-southeast-1.elasticbeanstalk.com/api/send-mail",
         data: bodydata,
-      })
+      });
 
       this.$emit("close");
     },
