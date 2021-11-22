@@ -43,110 +43,34 @@
       </div>
 
       <!-- logo/portfolio transitioning -->
-      <!-- batch one -->
-      <ul class="client-logo-container">
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="one" key="a" :src="require('@/assets/one/one.png')"></v-img>
-            <v-img v-if="!one" key="b" :src="require('@/assets/two/one.png')"></v-img>
-          </transition>
-        </li>
 
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="two" key="a" :src="require('@/assets/one/two.png')"></v-img>
-            <v-img v-if="!two" key="b" :src="require('@/assets/two/two.png')"></v-img>
-          </transition>
-        </li>
-
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="three" :src=" require('@/assets/one/three.png')"></v-img>
-            <v-img v-if="!three" key="b" :src="require('@/assets/two/three.png')"></v-img>
-          </transition>
-        </li>
-
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="four" key="a" :src="require('@/assets/one/four.png')"></v-img>
-            <v-img v-if="!four" key="b" :src="require('@/assets/two/four.png')"></v-img>
-          </transition>
-        </li>
-
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="five" key="a" :src="require('@/assets/one/five.png')"></v-img>
-            <v-img v-if="!five" key="b" :src="require('@/assets/two/five.png')"></v-img>
-          </transition>
-        </li>
-
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="six" key="a" :src="require('@/assets/one/six.png')"></v-img>
-            <v-img v-if="!six" key="b" :src="require('@/assets/two/six.png')"></v-img>
-          </transition>
-        </li>
-
-        <li>
-          <transition name="slide" mode="out-in">
-            <v-img v-if="seven" key="a" :src="require('@/assets/one/seven.png')"></v-img>
-            <v-img v-if="!seven" key="b" :src="require('@/assets/two/seven.png')"></v-img>
-          </transition>
-        </li>
-      </ul>
-
-      <!-- batch two -->
-      <!-- <ul class="client-logo-container">
-        <li>
+      <div class="logos mx-auto">
+        <div
+          class="d-flex item justify-center align-center"
+          v-for="(image, i) in sponsors[currentSponsor].img"
+          :style="{}"
+          :key="i"
+        >
           <v-img
-            class="twotwo"
-            max-width="100vw"
-            :src="require('@/assets/two/one.png')"
+            :key="cycle"
+            :src="image"
+            contain
+            content-class="logo"
+            max-width="100%"
+            max-height="100%"
+            min-width="100%"
+            min-height="100%"
+            :class="[
+              cycle
+                ? ` animate__animated animate__fadeIn`
+                : 'animate__animated hide',
+            ]"
+            :style="{
+              animationDelay: `${i}s`,
+            }"
           ></v-img>
-        </li>
-        <li>
-          <v-img
-            class="two"
-            max-width="100vw"
-            :src="require('@/assets/two/two.png')"
-          ></v-img>
-        </li>
-        <li>
-          <v-img
-            class="two"
-            max-width="100vw"
-            :src="require('@/assets/two/three.png')"
-          ></v-img>
-        </li>
-        <li>
-          <v-img
-            class="two"
-            max-width="100vw"
-            :src="require('@/assets/two/four.png')"
-          ></v-img>
-        </li>
-        <li>
-          <v-img
-            class="two"
-            max-width="100vw"
-            :src="require('@/assets/two/five.png')"
-          ></v-img>
-        </li>
-        <li>
-          <v-img
-            class="two"
-            max-width="100vw"
-            :src="require('@/assets/two/six.png')"
-          ></v-img>
-        </li>
-        <li>
-          <v-img
-            class="two"
-            max-width="100vw"
-            :src="require('@/assets/two/seven.png')"
-          ></v-img>
-        </li>
-      </ul> -->
+        </div>
+      </div>
 
       <DemoPopup :show="showDiag" @close="showDiag = false"></DemoPopup>
 
@@ -159,66 +83,67 @@
 </template>
 
 <script>
+import "animate.css";
+
 export default {
   components: {
     DemoPopup: () => import("@/components/demo-popup.vue"),
   },
   data: () => ({
-    showDiag: false,
-    one: true,
-    two: true,
-    three: true,
-    four: true,
-    five: true,
-    six: true,
-    seven: true,
+    currentSponsor: 0,
+    cycle: true,
+    time: 10000,
+    sponsors: [
+      {
+        title: "First",
+        img: [
+          require("@/assets/one/one.png"),
+          require("@/assets/one/two.png"),
+          require("@/assets/one/three.png"),
+          require("@/assets/one/four.png"),
+          require("@/assets/one/five.png"),
+          require("@/assets/one/six.png"),
+          require("@/assets/one/seven.png"),
+        ],
+      },
+      {
+        title: "Second",
+        img: [
+          require("@/assets/two/one.png"),
+          require("@/assets/two/two.png"),
+          require("@/assets/two/three.png"),
+          require("@/assets/two/four.png"),
+          require("@/assets/two/five.png"),
+          require("@/assets/two/six.png"),
+          require("@/assets/two/seven.png"),
+        ],
+      },
+    ],
   }),
+  methods: {
+    cycleSponsor() {
+      this.time = this.currentSponsor == 0 ? 10000 : 10000;
+      setTimeout(() => {
+        this.cycle = false;
+        setTimeout(() => {
+          this.cycle = true;
+        }, 100);
+        if (this.currentSponsor < 2) {
+          this.currentSponsor++;
+        } else {
+          this.currentSponsor = 0;
+        }
+        this.cycleSponsor();
+      }, this.time);
+    },
+  },
   mounted() {
-    setInterval(() => {
-      this.one = !this.one;
-      this.two = !this.two;
-      this.three = !this.three;
-      this.four = !this.four;
-      this.five = !this.five;
-      this.six = !this.six;
-      this.seven = !this.seven;
-    }, 10000);
-    // setInterval(() => {
-    //   this.two = !this.two;
-    // }, 13000);
-    // setInterval(() => {
-    //   this.three = !this.three;
-    // }, 15000);
-    // setInterval(() => {
-    //   this.four = !this.four;
-    // }, 9000);
-    // setInterval(() => {
-    //   this.five = !this.five;
-    // }, 18000);
-    // setInterval(() => {
-    //   this.six = !this.six;
-    // }, 8000);
-    // setInterval(() => {
-    //   this.seven = !this.seven;
-    // }, 17000);
+    this.cycleSponsor();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-slide-enter-active,
-.slide-leave-active {
-  transition: all 0.8s;
-}
-.slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(+100%);
-}
-.slide-enter {
-  opacity: 1;
-  transform: translateY(-100%);
-}
-
 .bg {
   height: 100%;
   background-color: #7776bc;
@@ -256,8 +181,35 @@ slide-enter-active,
   }
 }
 
+.hide {
+  opacity: 0;
+}
+.logos {
+  width: 60%;
+  height: 100%;
+  max-width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // flex-wrap: wrap;
+}
 .logo {
-  order: 1;
+  min-width: 80px;
+}
+.b {
+  max-width: 1000px;
+}
+.sponsors {
+  width: 100%;
+  height: 130px;
+  font-size: 1.3rem;
+  z-index: 30;
+}
+.item {
+  min-width: 9%;
+  max-width: 19%;
+  max-height: 46px;
+  min-height: 45px;
 }
 .about {
   order: 2;
@@ -325,6 +277,22 @@ slide-enter-active,
 }
 
 @media (max-width: 600px) {
+  .logos {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 10px;
+  }
+  .logo {
+    max-width: 50px !important;
+    max-height: 30px;
+  }
+  .item {
+    min-width: 10%;
+    max-width: 12%;
+    max-height: 30px;
+    min-height: 30px;
+  }
   .parent {
     // overflow: hidden;
     gap: 4.2rem;
